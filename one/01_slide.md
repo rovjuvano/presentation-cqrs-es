@@ -1,5 +1,6 @@
 !SLIDE
 # From CRUD to CQRS+ES
+### 5 steps from convention
 
 !SLIDE
 ### Agenda
@@ -19,10 +20,9 @@
 
 !SLIDE
 ## layered architecture
-* Database
-* Model (via ORM)
-* Controller
-* View/Client
+
+!SLIDE center
+![crud](crud.svg)
 
 !SLIDE
 ## Problems with CRUD
@@ -91,6 +91,9 @@
 # Breaks Abstractions
 
 !SLIDE
+# DB is bottleneck and SOP
+
+!SLIDE
 # enough already!
 
 !SLIDE
@@ -110,7 +113,7 @@
 !SLIDE
 ## CQS (cont.)
 * asking a question should not change the answer
-* methods should return a value only if they are referentially transparent and hence possess no side effects.
+* methods should return a value only if they are <em>referentially transparent</em> and hence possess <em>no side effects</em>.
 
 !SLIDE
 ## CQS by other names
@@ -139,9 +142,9 @@
 ## (that's it - it is not an architecture)
 
 !SLIDE
-* All methods are commands
+## All methods are commands
 ### OR
-* All methods are queries
+## All methods are queries
 ### not both
 
 !SLIDE
@@ -151,21 +154,20 @@
 # layered architecture revisited
 
 !SLIDE
-# Read side
-* DB
-* ViewModel (via DBI)
-* View/Client
+# Query side
+
+!SLIDE center
+![cqrs-query](cqrs-query.svg)
 
 !SLIDE
 # fewer layers
 # simpler layers
 
 !SLIDE
-# Write side
-* DB
-* Model (via ORM)
-* Controller
-* View/Client
+# Command side
+
+!SLIDE center
+![cqrs-command](cqrs-command.svg)
 
 !SLIDE
 # no structural changes
@@ -174,20 +176,26 @@
 # BUT
 
 !SLIDE
-## write side is free of reads
+## command side is free of queries
+
+!SLIDE center
+![cqrs](cqrs.svg)
 
 !SLIDE
-# Apply CQS to DB
+# Step 1
+## Segragate Commands and Queries
 
 !SLIDE
-## write only* DB
+# Apply CQRS to DB
+
+!SLIDE
+## write heavy DB (commands)
 ### OR
-## read only* DB
+## read heavy DB (queries)
 ### not both
-\* (from application)
 
 !SLIDE
-## write side can have optimized 3NF DB
+## command side can have optimized 3NF DB
 
 !SLIDE
     @@@ ruby
@@ -195,7 +203,7 @@
     has_many :comments, :through => :articles
 
 !SLIDE
-## read side can be denormalized
+## query side can be denormalized
     @@@ sql
     SELECT * FROM dashboard;
 
@@ -205,11 +213,18 @@
     ### CoachDB example
 
 !SLIDE
-# Many Specialized Read DBs
+# Many Specialized Query DBs
 * Object Store
 * Memory Image
 * ViewModel
-* Read DB = Cache
+* Query DB = Cache
+
+!SLIDE center
+![cqrs2](cqrs2.svg)
+
+!SLIDE
+# Step 2
+## use many query optimized DBs
 
 !SLIDE
 # BUT
@@ -259,8 +274,12 @@
 !SLIDE
 # Update Query DBs from Events
 
+!SLIDE center
+![cqrs+es-alpha](cqrs+es-alpha.svg)
+
 !SLIDE
-# picture
+# Step 3
+## sync models via events
 
 !SLIDE
 # BONUS!
@@ -270,8 +289,8 @@
 
 !SLIDE
 # Replay!
-* rebuild query DBs
-* create new query DBs
+* create new query datastores
+* rebuild query datastores
 * rewind pre-bug and replay events
 
 !SLIDE
@@ -309,6 +328,7 @@
 # Filesystem!
 # Implementable in Bash!
 # Incremental backups!
+# Partioning/Sharding
 
 !SLIDE
 # No Erasers!
@@ -318,18 +338,9 @@
 # SQL or NoSQL
 
 !SLIDE
-# Wait there's more
-
-!SLIDE
-# Testing Made Easy/Simple
-## Given a series of events has occurred
-## When a single command is received
-## Then a series of events occurs
-
-!SLIDE
 # Uses for Event Store
 * building Domain Models
-* building queary datastores
+* building query datastores
 * building data warehouses (realtime!)
 * monitoring - Oooh Pretty
 * debugging
@@ -350,6 +361,19 @@
 
 !SLIDE
 # Make marketing kiss your feet!
+
+!SLIDE
+# Step 4
+## store events instead of domain objects
+
+!SLIDE
+# Wait there's more
+
+!SLIDE
+# Testing Made Easy/Simple
+## Given a series of events has occurred
+## When a single command is received
+## Then a series of events occurs
 
 !SLIDE
 # &lt;aside>
@@ -411,12 +435,39 @@ PASS!
 # &lt;/aside>
 
 !SLIDE
+## Step 5
+# build domain models from events
+
+!SLIDE center
+![cqrs+es](cqrs+es.svg)
+
+!SLIDE center
+![cqrs+es-simple](cqrs+es-simple.svg)
+
+!SLIDE
 # In Review
-* segregate commands from queries
-* use many query optimized DBs
-* sync models via events
-* store events instead of domain objects
-* build domain models from events
+
+!SLIDE
+# Starting with CRUD
+!SLIDE center
+![crud](crud.svg)
+!SLIDE
+## 1. Segregate commands from queries
+!SLIDE center
+![cqrs](cqrs.svg)
+!SLIDE
+## 2. Use many query optimized DBs
+!SLIDE center
+![cqrs2](cqrs2.svg)
+!SLIDE
+## 3. Sync models via events
+!SLIDE center
+![cqrs+es-alpha](cqrs+es-alpha.svg)
+!SLIDE
+## 4. Store events instead of domain objects
+## 5. Build domain models from events
+!SLIDE center
+![cqrs+es](cqrs+es.svg)
 
 !SLIDE
 ## More info
@@ -447,4 +498,12 @@ http://martinfowler.com/bliki/MemoryImage.html
 ## Many examples as well
 
 !SLIDE
+## Work for 2Checkout.com
+
+!SLIDE smbullets
 # Q&A
+## From CRUD to CQRS+ES
+## 5 steps from convention
+### 2012-02-XX
+### Robert Juliano
+### 2Checkout.com
