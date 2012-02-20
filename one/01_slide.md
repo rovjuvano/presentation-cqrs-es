@@ -199,8 +199,12 @@
 
 !SLIDE
     @@@ ruby
-    has_many :articles
-    has_many :comments, :through => :articles
+    belongs_to :portfolio
+    has_one :project_manager
+    has_many :milestones
+    has_many :assignments
+    has_many :programmers,
+             :through => :assignments
 
 !SLIDE
 ## query side can be denormalized
@@ -210,7 +214,7 @@
 !SLIDE
 ## or be document store
     @@@ ruby
-    ### CoachDB example
+    couch_server.get('dashboard')
 
 !SLIDE
 # Many Specialized Query DBs
@@ -469,6 +473,17 @@ PASS!
 !SLIDE center
 ![cqrs+es](cqrs+es.svg)
 
+!SLIDE smbullets
+# Not Covered
+* Task-Based UI
+* Command Handlers
+* Command Chaining
+* Concurrency Exceptions
+* Snapshots
+* Event Handlers
+* Command Stores
+* AggregrateRoots and others DDD concepts
+
 !SLIDE
 ## More info
 ## Greg Young
@@ -488,6 +503,18 @@ http://www.infoq.com/presentations/Events-Are-Not-Just-for-Notifications
 http://skillsmatter.com/podcast/design-architecture/greg-young-cqrs-event-sourcing-the-business-perspective
 
 !SLIDE
+## Mega Video
+### 6.5 hours
+### http://cqrs.wordpress.com/video/
+### 56 pages of handouts
+### http://cqrs.wordpress.com/documents/
+
+!SLIDE smbullets
+# Websites
+* s/ www.cqrsinfo.com / cqrs.wordpress.com /gx
+* http://groups.google.com/group/dddcqrs
+
+!SLIDE
 ## MartinFowler
 http://martinfowler.com/bliki/CQRS.html
 http://martinfowler.com/eaaDev/EventSourcing.html
@@ -504,6 +531,6 @@ http://martinfowler.com/bliki/MemoryImage.html
 # Q&A
 ## From CRUD to CQRS+ES
 ## 5 steps from convention
-### 2012-02-XX
+### 2012-02-20
 ### Robert Juliano
 ### 2Checkout.com

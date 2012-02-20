@@ -1,0 +1,12 @@
+http://cqrs.wordpress.com/
+http://groups.google.com/group/dddcqrs
+https://github.com/slashdotdash
+http://www.slideshare.net/cavalle/the-cqrs-diet
+http://www.slideshare.net/methodmissing/railswaycon-2010-command-your-domain
+https://github.com/cavalle/banksimplistic
+http://www.udidahan.com/2009/12/09/clarified-cqrs/
+https://github.com/petrjanda/node-cqrs (esp. lib/aggregate.js)
+https://github.com/jamuhl/nodeCQRS
+https://github.com/jamuhl/backbone.CQRS
+https://github.com/ToJans/MinimalisticCQRS
+https://github.com/etishor/CQRSEventSourcingSample
