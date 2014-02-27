@@ -30,7 +30,7 @@
 !SLIDE
 * tight coupling Model <=> DB
 * two data models!
-* AR is a chimera
+* AR, Hibernate is a chimera
 
 !SLIDE
 * In a world with only four verbs, nouns dominate!
@@ -178,12 +178,12 @@
 !SLIDE
 ## command side is free of queries
 
-!SLIDE center
-![cqrs](cqrs.svg)
-
 !SLIDE
 # Step 1
 ## Segragate Commands and Queries
+
+!SLIDE center
+![cqrs](cqrs.svg)
 
 !SLIDE
 # Apply CQRS to DB
@@ -223,48 +223,18 @@
 * ViewModel
 * Query DB = Cache
 
-!SLIDE center
-![cqrs2](cqrs2.svg)
-
 !SLIDE
 # Step 2
 ## use many query optimized DBs
+
+!SLIDE center
+![cqrs2](cqrs2.svg)
 
 !SLIDE
 # BUT
 
 !SLIDE
 ## Now there are 2+ DBs?
-
-!SLIDE
-# &lt;aside>
-
-!SLIDE
-## DRY is sacred!
-
-!SLIDE
-# Duplicate code
-# vs
-# Duplicate data
-
-!SLIDE
-# DBTL
-## Don't
-## Be
-## Too
-## Literal
-
-!SLIDE
-# Backups!
-# Replicas!
-# Load Balancing!
-# High Availability!
-
-!SLIDE
-## Duplication can be good!
-
-!SLIDE
-# &lt;/aside>
 
 !SLIDE
 # Synching Query DBs to Command DB
@@ -278,12 +248,12 @@
 !SLIDE
 # Update Query DBs from Events
 
-!SLIDE center
-![cqrs+es-alpha](cqrs+es-alpha.svg)
-
 !SLIDE
 # Step 3
 ## sync models via events
+
+!SLIDE center
+![cqrs+es-alpha](cqrs+es-alpha.svg)
 
 !SLIDE
 # BONUS!
@@ -397,6 +367,7 @@
 
 !SLIDE
 FAIL!
+
     @@@ ruby
     account.balance.should == 20
     Thread.new { account.withdraw(10) }
@@ -429,6 +400,7 @@ FAIL!
 
 !SLIDE
 PASS!
+
     @@@ ruby
     account.balance.should == 20
     Thread.new { account.withdraw(10) }
@@ -489,7 +461,7 @@ PASS!
 ## Greg Young
 ### CTO of IMIS
 ### stock market analytics firm
-### sharing CQRS+ES 3+ years
+### sharing CQRS+ES 5+ years
 
 !SLIDE
 ## Videos
@@ -524,13 +496,16 @@ http://martinfowler.com/bliki/MemoryImage.html
 ## Many frameworks on github
 ## Many examples as well
 
-!SLIDE
-## Work for 2Checkout.com
-
 !SLIDE smbullets
 # Q&A
 ## From CRUD to CQRS+ES
 ## 5 steps from convention
-### 2012-02-20
+### 2014-02-27
 ### Robert Juliano
-### 2Checkout.com
+
+!SLIDE
+Introduction to CQRS
+http://www.codeproject.com/Articles/555855/Introduction-to-CQRS
+
+http://www.cqrs.nu/
+http://cqrsjourney.github.io/
